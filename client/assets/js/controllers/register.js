@@ -106,8 +106,16 @@ function formValidation() {
         delete user.confirmPassword;
         hash = md5(userInfo.password.value.trim());
         user.password = hash;
-        localStorage.setItem('user', JSON.stringify(user));
-        document.location.hash = "login";
+
+        VT.send('POST', '/register', user, errorHandler, render);
+
+        function render(res){
+            document.location.hash = "login";
+        }
+
+        function errorHandler(code, error) {
+            console.error(code.error, error);
+        }
     }
 
     return isValid;

@@ -2,7 +2,10 @@
   "name": "expressapp",
   "version": "1.0.0",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "jwt-simple": "^0.5.1",
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.4"
   }

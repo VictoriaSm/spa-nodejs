@@ -242,19 +242,22 @@ var VT = (function () {
     }
 
     function obj_to_query_str(params){
+        // console.log('.................',params);
         var uri = [];
         obj_forEach(params, function(item, key){
             uri.push(key + '=' + encodeURIComponent(item));
         });
-        return uri.join('&');
+        var t = uri.join('&');
+        // console.log('.................',t,uri);
+        return t;
     }
 
     function send(method, url, params, ecb, scb) {
         if (!method || !url) ecb({error: "no params"});
-        params = params ? JSON.stringify(params) : null;
+        params =  params ? method !== "GET" ? JSON.stringify(params) : params : null;
         method = method.toUpperCase();
 
-        if(method == "GET" && params)
+        if(method === "GET" && params)
             if(url.indexOf('?') >-1)
                 url += "&" + obj_to_query_str(params);
             else
