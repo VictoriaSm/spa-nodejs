@@ -11,7 +11,7 @@ app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json());
 
 app.use(require('./api/register'));
-// app.use(require('./api/login'));
+app.use(require('./api/login'));
 // app.use(require('./api/edit'));
 
 app.listen(port, function () {

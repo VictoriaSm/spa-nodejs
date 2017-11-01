@@ -1,15 +1,14 @@
 function formValidation() {
     var user = {
-        login: '',
+        username: '',
         email: '',
         password: '',
         name: '',
         age: ''
     };
     var isValid = true;
-    var hash;
     var userInfo = {
-        login: document.querySelector('.login'),
+        username: document.querySelector('.username'),
         email: document.querySelector('.email'),
         password: document.querySelector('.password'),
         confirmPassword: document.querySelector('.confirmPassword'),
@@ -18,7 +17,7 @@ function formValidation() {
     };
 
     var validationConfig = {
-        login: {
+        username: {
             required: true,
             minLength: 3
         },
@@ -104,8 +103,6 @@ function formValidation() {
 
     if ( isValid === true ) {
         delete user.confirmPassword;
-        hash = md5(userInfo.password.value.trim());
-        user.password = hash;
 
         VT.send('POST', '/register', user, errorHandler, render);
 
@@ -114,7 +111,11 @@ function formValidation() {
         }
 
         function errorHandler(code, error) {
-            console.error(code.error, error);
+            if ( code === 400 ) {
+                var str = error.toLowerCase().split(' ')[0];
+                userInfo[str].classList.add('error');
+                userInfo[str].nextElementSibling.innerHTML = error;
+            } else console.error(code, error);
         }
     }
 

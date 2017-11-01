@@ -1,6 +1,6 @@
 function formLogin() {
     var userInfoLog = {
-        login: document.querySelector('.loginLog'),
+        username: document.querySelector('.loginLog'),
         password: document.querySelector('.passwordLog')
     };
     var isValue = true;
@@ -9,11 +9,11 @@ function formLogin() {
     var userLog = JSON.parse(localStorage.getItem('user'));
 
     var validConfig = {
-        login: {
+        username: {
             required: true
         },
         password: {
-            md5: true
+            required: true
         }
     };
 
@@ -51,8 +51,17 @@ function formLogin() {
     }
 
     if ( isValue === true ) {
-        document.location.hash = "homes";
-        localStorage.setItem('authorized', 1);
+        VT.send('POST', '/login', errorHandler, render);
+
+        function render(res) {
+
+        }
+
+        function errorHandler(code, error) {
+
+        }
+
+        // document.location.hash = "homes";
     }
 
     return isValue;
