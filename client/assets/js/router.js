@@ -8,7 +8,7 @@ function Router(routes) {
 }
 
 Router.prototype.hashChanged = function () {
-    isAuth();
+    // isAuth();
     if (window.location.hash.length > 0) {
         var pageName = window.location.hash.substr(1);
         var page = this.routes[pageName].template;

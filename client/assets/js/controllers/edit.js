@@ -1,3 +1,15 @@
+HTTP.getToken();
+
+HTTP.put('/edit', {}, errorEdit, renderEdit);
+
+function renderEdit(res) {
+    console.log('.................', res);
+}
+
+function errorEdit(code, error) {
+    console.error(code, error);
+}
+
 function saveProfile() {
     var userProfile = {
         name: document.querySelector('.nameEdit'),
@@ -6,7 +18,6 @@ function saveProfile() {
     };
 
     var user = JSON.parse(localStorage.getItem('user'));
-    var hash;
 
     var isValid = true;
     var validConfig = {
@@ -65,10 +76,6 @@ function saveProfile() {
     if ( isValid === true ) {
         user.gender = document.querySelector('.gender:checked').value;
 
-        if ( user.password === userProfile.password.value ) {
-            hash = md5(user.password);
-            user.password = hash;
-        }
         localStorage.setItem('user', JSON.stringify(user));
     }
 }

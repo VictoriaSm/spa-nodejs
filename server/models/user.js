@@ -18,10 +18,12 @@ var schema = new Schema({
         type: String,
         required: true,
         minLength: 6,
-        maxLength: 15
+        maxLength: 15,
+        select: false
     },
     salt: {
-        type: String
+        type: String,
+        select: false
     },
     name: {
         type: String,

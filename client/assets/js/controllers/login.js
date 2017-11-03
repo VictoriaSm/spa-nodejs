@@ -1,12 +1,10 @@
 function formLogin() {
-    var userInfoLog = {
+    var userLog = {
         username: document.querySelector('.loginLog'),
         password: document.querySelector('.passwordLog')
     };
+    var user = {};
     var isValue = true;
-
-    var hash;
-    var userLog = JSON.parse(localStorage.getItem('user'));
 
     var validConfig = {
         username: {
@@ -17,51 +15,35 @@ function formLogin() {
         }
     };
 
-    if ( userLog === null ) {
-        return;
-    }
-
     isCoincidence();
 
     function isCoincidence() {
         VT.obj_forEach(validConfig, function (item, key) {
             if ( item.required ) {
-                if (userInfoLog[key].value !== userLog[key]) {
-                    userInfoLog[key].classList.add('error');
-                    userInfoLog[key].nextElementSibling.innerHTML = 'Incorrect';
+                if (userLog[key].value === '') {
+                    userLog[key].classList.add('error');
+                    userLog[key].nextElementSibling.innerHTML = 'Required field';
                     isValue = false;
                 } else {
-                    userInfoLog[key].classList.remove('error');
-                    userInfoLog[key].nextElementSibling.innerHTML = '';
-                }
-            }
-
-            if ( item.md5 ) {
-                hash = md5(userInfoLog[key].value);
-                if ( hash !== userLog[key] ) {
-                    userInfoLog[key].classList.add('error');
-                    userInfoLog[key].nextElementSibling.innerHTML = 'Incorrect';
-                    isValue = false;
-                } else {
-                    userInfoLog[key].classList.remove('error');
-                    userInfoLog[key].nextElementSibling.innerHTML = '';
+                    userLog[key].classList.remove('error');
+                    userLog[key].nextElementSibling.innerHTML = '';
+                    user[key] = userLog[key].value;
                 }
             }
         });
     }
 
     if ( isValue === true ) {
-        VT.send('POST', '/login', errorHandler, render);
+        VT.send('POST', '/login', user, errorHandler, render);
 
         function render(res) {
-
+            HTTP.setToken(res);
+            document.location.hash = "edit";
         }
 
         function errorHandler(code, error) {
-
+            console.error(code, error);
         }
-
-        // document.location.hash = "homes";
     }
 
     return isValue;

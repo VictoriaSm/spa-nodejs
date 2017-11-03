@@ -252,7 +252,7 @@ var VT = (function () {
         return t;
     }
 
-    function send(method, url, params, ecb, scb) {
+    function send(method, url, params, ecb, scb,headers) {
         if (!method || !url) ecb({error: "no params"});
         params =  params ? method !== "GET" ? JSON.stringify(params) : params : null;
         method = method.toUpperCase();
@@ -269,6 +269,9 @@ var VT = (function () {
         xhr.open(method, url, true);
         xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        obj_forEach(headers, function(val, key){
+            xhr.setRequestHeader(key, val);
+        });
 
 
         xhr.onreadystatechange = function () {
