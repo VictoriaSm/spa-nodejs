@@ -5,26 +5,26 @@ function getUrl( url ){
     return xhr.responseText;
 }
 var homesObj = JSON.parse(getUrl( 'homes.json' ));
-var authRequired = ['#homes', '#edit'];
+var authRequired = ['/homes', '/edit'];
 
 function isAuth() {
-    var isAuth = localStorage.getItem('authorized') == 1;
-    var hashValue = window.location.hash;
+    var hashValue = window.location.hash.replace('#', '/');
     var logoutMenu = document.querySelector('#logoutMenu');
     var loginMenu = document.querySelector('#loginMenu');
 
-    if ( authRequired.indexOf(hashValue) > -1 && !isAuth ){
-        //todo redirect
-        document.location.hash = "login";
-    } else if ( isAuth && hashValue === '#login' ) {
-            isAuth = localStorage.setItem('authorized', 0);
-    }
+    if ( authRequired.indexOf(hashValue) > -1 ){
+        HTTP.getToken();
 
-    if ( isAuth ) {
-        logoutMenu.classList.add('hide-menu');
-        loginMenu.classList.remove('hide-menu');
-    } else {
-        loginMenu.classList.add('hide-menu');
-        logoutMenu.classList.remove('hide-menu');
+        HTTP.get(hashValue, {}, errorHandler, render);
+
+        function render(res) {
+            logoutMenu.classList.add('hide-menu');
+            loginMenu.classList.remove('hide-menu');
+            console.log('.................',res);
+        }
+        function errorHandler(code, error) {
+            //todo redirect
+            document.location.hash = 'login';
+        }
     }
 }

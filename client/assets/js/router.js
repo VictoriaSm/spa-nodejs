@@ -8,17 +8,20 @@ function Router(routes) {
 }
 
 Router.prototype.hashChanged = function () {
-    // isAuth();
+    var _this = this;
     if (window.location.hash.length > 0) {
-        var pageName = window.location.hash.substr(1);
-        var page = this.routes[pageName].template;
+        isAuth();
+        setTimeout(function () {
+            var pageName = window.location.hash.substr(1);
+            var page = _this.routes[pageName].template;
 
-        if ( pageContent[pageName] === undefined ) {
-            page.addScript(pageName);
-            page.load(pageName);
-        } else {
-            page.show(pageName);
-            page.execFunc(pageName);
-        }
+            if ( pageContent[pageName] === undefined ) {
+                page.addScript(pageName);
+                page.load(pageName);
+            } else {
+                page.show(pageName);
+                page.execFunc(pageName);
+            }
+        }, 10);
     }
 };

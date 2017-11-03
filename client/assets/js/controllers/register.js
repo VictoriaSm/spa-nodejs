@@ -109,7 +109,6 @@ function formValidation() {
         function render(res){
             document.location.hash = "login";
         }
-
         function errorHandler(code, error) {
             if ( code === 400 ) {
                 var str = error.toLowerCase().split(' ')[0];

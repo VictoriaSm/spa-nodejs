@@ -40,7 +40,6 @@ function formLogin() {
             HTTP.setToken(res);
             document.location.hash = "edit";
         }
-
         function errorHandler(code, error) {
             console.error(code, error);
         }
