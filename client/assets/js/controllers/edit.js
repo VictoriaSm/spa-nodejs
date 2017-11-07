@@ -1,11 +1,17 @@
-// HTTP.get('/edit', {}, errorEdit, renderEdit);
-//
-// function renderEdit(res) {
-//     console.log('.................',res);
-// }
-// function errorEdit(code, error) {
-//     console.log(code, error);
-// }
+function editFunc() {
+    HTTP.get('/user', {}, ecb, scb);
+
+    function scb(res) {
+        document.querySelector('.nameEdit').value = res.name;
+        document.querySelector('.ageEdit').value = res.age;
+        if ( res.gender ) {
+            document.querySelector('.gender[value='+res.gender+']').checked = true;
+        }
+    }
+    function ecb(code, error) {
+        console.log(code,error);
+    }
+}
 
 function saveProfile() {
     var userProfile = {
@@ -28,7 +34,7 @@ function saveProfile() {
         },
         password: {
             whiteSpace: false,
-            minLength: 5
+            minLength: 6
         }
     };
 
@@ -71,16 +77,29 @@ function saveProfile() {
     }
 
     if ( isValid === true ) {
-        user.gender = document.querySelector('.gender:checked').value;
+        if (document.querySelector('.gender:checked')) {
+            user.gender = document.querySelector('.gender:checked').value;
+        }
 
         VT.send('PUT', '/edit', user, errorHandler, render);
 
         function render(res) {
             console.log('.................',res);
         }
-
         function errorHandler(code, error) {
             console.log(code, error);
         }
+    }
+}
+
+function deleteProfile() {
+    HTTP.deleteUser('/delete', {}, ecb, scb);
+
+    function scb(res) {
+        document.location.hash = 'login';
+        logout();
+    }
+    function ecb(code, error) {
+        console.log(code,error);
     }
 }

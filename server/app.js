@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 app.use(require('./api/register'));
 app.use(require('./api/login'));
 app.use(require('./api/edit'));
+app.use(require('./api/homes'));
+app.use(require('./api/delete'));
 
 app.listen(port, function () {
     console.log('Server running at http://localhost:' + [port]);

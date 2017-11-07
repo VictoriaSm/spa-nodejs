@@ -10,8 +10,7 @@ function Router(routes) {
 Router.prototype.hashChanged = function () {
     var _this = this;
     if (window.location.hash.length > 0) {
-        isAuth();
-        setTimeout(function () {
+        isAuth(function () {
             var pageName = window.location.hash.substr(1);
             var page = _this.routes[pageName].template;
 
@@ -22,6 +21,6 @@ Router.prototype.hashChanged = function () {
                 page.show(pageName);
                 page.execFunc(pageName);
             }
-        }, 10);
+        });
     }
 };

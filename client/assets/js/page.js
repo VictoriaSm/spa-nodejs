@@ -1,5 +1,4 @@
 var el = document.querySelector('#main');
-var nav = document.querySelector('.nav');
 
 var pageContent = {};
 var scriptFlag = {};

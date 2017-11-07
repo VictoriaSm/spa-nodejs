@@ -5,26 +5,26 @@ function getUrl( url ){
     return xhr.responseText;
 }
 var homesObj = JSON.parse(getUrl( 'homes.json' ));
+var logoutMenu = document.querySelector('#logoutMenu');
+var loginMenu = document.querySelector('#loginMenu');
 var authRequired = ['/homes', '/edit'];
 
-function isAuth() {
-    var hashValue = window.location.hash.replace('#', '/');
-    var logoutMenu = document.querySelector('#logoutMenu');
-    var loginMenu = document.querySelector('#loginMenu');
+function isAuth(callback) {
+    var hashValue = document.location.hash.replace('#', '/');
 
-    if ( authRequired.indexOf(hashValue) > -1 ){
-        HTTP.getToken();
-
-        HTTP.get(hashValue, {}, errorHandler, render);
-
-        function render(res) {
+    if ( authRequired.indexOf(hashValue) > -1 ) {
+        var t = localStorage.getItem('token');
+        if ( t.length > 10 ) {
             logoutMenu.classList.add('hide-menu');
             loginMenu.classList.remove('hide-menu');
-            console.log('.................',res);
-        }
-        function errorHandler(code, error) {
+            callback();
+        } else {
             //todo redirect
             document.location.hash = 'login';
         }
-    }
+    } else callback();
+}
+
+function logout() {
+    HTTP.setToken(false);
 }

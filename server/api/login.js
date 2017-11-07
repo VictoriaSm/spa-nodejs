@@ -30,7 +30,7 @@ function authUser(req, res) {
                     if (!valid){
                         return res.sendStatus(401);
                     }
-                    var token = jwt.encode({username: username}, config.secretKey);
+                    var token = jwt.encode({username: username, id: user._id}, config.secretKey);
                     res.send(token);
                 });
             });

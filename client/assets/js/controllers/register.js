@@ -26,7 +26,7 @@ function formValidation() {
         },
         password: {
             required: true,
-            minLength: 5
+            minLength: 6
         },
         confirmPassword: {
             required: true

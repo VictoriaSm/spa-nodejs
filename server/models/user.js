@@ -36,6 +36,10 @@ var schema = new Schema({
         required: false,
         min: 10,
         max: 110
+    },
+    gender: {
+        type: String,
+        required: false
     }
 });
 

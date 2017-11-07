@@ -10,7 +10,7 @@ var r = new Router(
         },
         edit: {
             templateUrl: 'editProfile.html',
-            func: false
+            func: true
         },
         homes: {
             templateUrl: 'homes.html',
