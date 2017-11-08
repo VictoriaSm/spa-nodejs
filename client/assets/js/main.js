@@ -19,6 +19,10 @@ var r = new Router(
         error: {
             templateUrl: 'error.html',
             func: false
+        },
+        chat: {
+            templateUrl: 'chat.html',
+            func: false
         }
     }
 );
