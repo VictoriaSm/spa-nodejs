@@ -1,29 +1,8 @@
 var router = require('express').Router();
 var bcrypt = require('bcrypt');
-var jwt = require('jwt-simple');
-var config = require('../config');
 var User = require('../models/user').User;
 
 router.post('/register', createUser);
-
-// router.get('/register', function (req, res) {
-//     if(!req.headers['x-auth']) {
-//         return res.sendStatus(401);
-//     }
-//     try {
-//         var auth = jwt.decode(req.headers['x-auth'], config.secretKey);
-//     } catch (err) {
-//         return res.sendStatus(401);
-//     }
-//     User.findOne({username: auth.username}, function(err, user) {
-//         if (err) {
-//             return res.sendStatus(500);
-//         }
-//         else {
-//             res.json(user);
-//         }
-//     })
-// });
 
 function createUser(req, res){
     var user = new User;
@@ -44,9 +23,9 @@ function createUser(req, res){
                 user.save(function (err) {
                     if (err) {
                         if (err.code === 11000 && err.message.indexOf('username') !== -1) {
-                            res.status(400).send('Username already exists');
+                            res.status(392).send({message: 'Username already exists', code: 1});
                         } else if (err.code === 11000 && err.message.indexOf('email') !== -1) {
-                            res.status(400).send('Email already exists');
+                            res.status(392).send({message: 'Email already exists', code: 2});
                         } else res.sendStatus(500);
                     }
                     else res.sendStatus(200);

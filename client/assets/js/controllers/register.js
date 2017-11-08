@@ -104,17 +104,23 @@ function formValidation() {
     if ( isValid === true ) {
         delete user.confirmPassword;
 
-        VT.send('POST', '/register', user, errorHandler, render);
+        HTTP.post('/register', user, errorHandler, render);
 
         function render(res){
             document.location.hash = "login";
         }
         function errorHandler(code, error) {
-            if ( code === 400 ) {
-                var str = error.toLowerCase().split(' ')[0];
-                userInfo[str].classList.add('error');
-                userInfo[str].nextElementSibling.innerHTML = error;
-            } else console.error(code, error);
+            if ( code === 392 ) {
+                if ( error.code === 1 ) {
+                    userInfo.username.classList.add('error');
+                    userInfo.username.nextElementSibling.innerHTML = error.message;
+                } else {
+                    userInfo.email.classList.add('error');
+                    userInfo.email.nextElementSibling.innerHTML = error.message;
+                }
+            } else {
+                document.location.hash = 'error';
+            }
         }
     }
 

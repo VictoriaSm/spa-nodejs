@@ -1,3 +1,5 @@
+var div = document.querySelector('.field-error');
+
 function editFunc() {
     HTTP.get('/user', {}, ecb, scb);
 
@@ -9,7 +11,12 @@ function editFunc() {
         }
     }
     function ecb(code, error) {
-        console.log(code,error);
+        if ( code === 401 ) {
+            document.location.hash = 'login';
+            logout();
+        } else {
+            document.location.hash = 'error';
+        }
     }
 }
 
@@ -81,13 +88,20 @@ function saveProfile() {
             user.gender = document.querySelector('.gender:checked').value;
         }
 
-        VT.send('PUT', '/edit', user, errorHandler, render);
+        HTTP.put('/edit', user, errorHandler, render);
 
         function render(res) {
-            console.log('.................',res);
+            userProfile.password.value = '';
+            div.classList.add('field-success');
+            div.firstElementChild.innerHTML = 'Changes saved';
         }
         function errorHandler(code, error) {
-            console.log(code, error);
+            if ( code === 401 ) {
+                document.location.hash = 'login';
+                logout();
+            } else if ( code === 500 ) {
+                document.location.hash = 'error';
+            } else div.firstElementChild.innerHTML = code + ': ' + error;
         }
     }
 }
@@ -100,6 +114,11 @@ function deleteProfile() {
         logout();
     }
     function ecb(code, error) {
-        console.log(code,error);
+        if ( code === 401 ) {
+            document.location.hash = 'login';
+            logout();
+        } else  {
+            document.location.hash = 'error';
+        }
     }
 }

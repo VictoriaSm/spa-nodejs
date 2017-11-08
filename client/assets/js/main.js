@@ -15,6 +15,10 @@ var r = new Router(
         homes: {
             templateUrl: 'homes.html',
             func: true
+        },
+        error: {
+            templateUrl: 'error.html',
+            func: false
         }
     }
 );

@@ -1,3 +1,12 @@
+HTTP.get('/homes', {}, errorCb, successCb);
+function successCb(res) {}
+function errorCb (code, error) {
+    if ( code === 401 ) {
+        document.location.hash = 'login';
+        logout();
+    }
+}
+
 function homesFunc() {
 
     /*--- Homes ---*/

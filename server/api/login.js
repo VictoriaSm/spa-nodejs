@@ -8,7 +8,7 @@ router.post('/login', authUser);
 
 function authUser(req, res) {
     if (!req.body.username || !req.body.password) {
-        return res.sendStatus(400);
+        return res.sendStatus(393);
     } else {
         var username = req.body.username;
         var password = req.body.password;
@@ -19,7 +19,7 @@ function authUser(req, res) {
                     return res.sendStatus(500);
                 }
                 if (!user) {
-                    return res.sendStatus(401);
+                    return res.status(391.1).send({message: 'Username does not exist', code: 1});
                 }
                 password += username;
                 var hash = user.salt + user.password;
@@ -28,7 +28,7 @@ function authUser(req, res) {
                         return res.sendStatus(500);
                     }
                     if (!valid){
-                        return res.sendStatus(401);
+                        return res.status(391.2).send({message: 'Password incorrect', code: 2});
                     }
                     var token = jwt.encode({username: username, id: user._id}, config.secretKey);
                     res.send(token);

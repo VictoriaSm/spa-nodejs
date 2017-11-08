@@ -34,14 +34,28 @@ function formLogin() {
     }
 
     if ( isValue === true ) {
-        VT.send('POST', '/login', user, errorHandler, render);
+        HTTP.post('/login', user, errorHandler, render);
 
         function render(res) {
             HTTP.setToken(res);
             document.location.hash = "edit";
         }
         function errorHandler(code, error) {
-            console.error(code, error);
+            var div = document.querySelector('.field-error');
+            if ( code === 391 ) {
+                div.firstElementChild.innerHTML = '';
+                if ( error.code === 1 ) {
+                    userLog.username.classList.add('error');
+                    userLog.username.nextElementSibling.innerHTML = error.message;
+                } else {
+                    userLog.password.classList.add('error');
+                    userLog.password.nextElementSibling.innerHTML = error.message;
+                }
+            } else if ( code === 393 ) {
+                div.firstElementChild.innerHTML = 'Required fields';
+            } else {
+                div.firstElementChild.innerHTML = code + ': ' + error;
+            }
         }
     }
 

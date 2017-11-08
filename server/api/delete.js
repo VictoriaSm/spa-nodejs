@@ -8,7 +8,7 @@ router.delete('/delete', auth.bearerAuth, function (req, res) {
             return res.sendStatus(500);
         }
         if (!user) {
-            return res.sendStatus(400);
+            return res.sendStatus(401);
         }
         res.send(200);
     });

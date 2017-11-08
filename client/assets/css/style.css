@@ -36,3 +36,21 @@ select {
 .btn-delete {
     float: right;
 }
+
+.field-error {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #ac2925;
+}
+
+.field-success {
+    color: #2b542c;
+}
+
+.err-500 {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: #8c8c8c;
+}
