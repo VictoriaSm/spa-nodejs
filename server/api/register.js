@@ -1,6 +1,6 @@
-var router = require('express').Router();
-var bcrypt = require('bcrypt');
-var User = require('../models/user').User;
+var router = require('express').Router(),
+    bcrypt = require('bcrypt'),
+    User = require('../models/user').User;
 
 router.post('/register', createUser);
 

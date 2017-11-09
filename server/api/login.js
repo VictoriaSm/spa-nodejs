@@ -1,8 +1,8 @@
-var router = require('express').Router();
-var bcrypt = require('bcrypt');
-var jwt = require('jwt-simple');
-var config = require('../config');
-var User = require('../models/user').User;
+var router = require('express').Router(),
+    bcrypt = require('bcrypt'),
+    jwt = require('jwt-simple'),
+    config = require('../config'),
+    User = require('../models/user').User;
 
 router.post('/login', authUser);
 
@@ -10,8 +10,8 @@ function authUser(req, res) {
     if (!req.body.username || !req.body.password) {
         return res.sendStatus(393);
     } else {
-        var username = req.body.username;
-        var password = req.body.password;
+        var username = req.body.username,
+            password = req.body.password;
         User.findOne({username: username})
             .select('password salt')
             .exec(function(err, user){

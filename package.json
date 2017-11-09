@@ -8,6 +8,7 @@
     "jwt-simple": "^0.5.1",
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.4",
+    "socket.io": "^2.0.4",
     "ws": "^3.3.0"
   }
 }

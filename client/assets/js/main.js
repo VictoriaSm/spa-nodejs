@@ -22,7 +22,7 @@ var r = new Router(
         },
         chat: {
             templateUrl: 'chat.html',
-            func: false
+            func: true
         }
     }
 );

@@ -1,7 +1,7 @@
-var router = require('express').Router();
-var bcrypt = require('bcrypt');
-var auth = require('./auth');
-var User = require('../models/user').User;
+var router = require('express').Router(),
+    bcrypt = require('bcrypt'),
+    auth = require('./auth'),
+    User = require('../models/user').User;
 
 router.get('/user', auth.bearerAuth, getUser);
 router.put('/edit', auth.bearerAuth, editProfile);
@@ -21,9 +21,9 @@ function getUser(req, res) {
 }
 
 function editProfile(req, res) {
-    var name = req.body.name;
-    var age = req.body.age;
-    var gender = req.body.gender;
+    var name = req.body.name,
+        age = req.body.age,
+        gender = req.body.gender;
 
     function errorSave(err) {
         if (err) {
@@ -32,7 +32,7 @@ function editProfile(req, res) {
         else res.sendStatus(200);
     }
 
-    User.findOne({username: 'test'}, function(err, user){
+    User.findOne({username: req.user['username']}, function(err, user){
         if (err) {
             return res.sendStatus(500);
         }

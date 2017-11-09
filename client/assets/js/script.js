@@ -4,10 +4,10 @@ function getUrl( url ){
     xhr.send(null);
     return xhr.responseText;
 }
-var homesObj = JSON.parse(getUrl( 'homes.json' ));
-var logoutMenu = document.querySelector('#logoutMenu');
-var loginMenu = document.querySelector('#loginMenu');
-var authRequired = ['/homes', '/edit', '/chat'];
+var homesObj = JSON.parse(getUrl( 'homes.json' )),
+    logoutMenu = document.querySelector('#logoutMenu'),
+    loginMenu = document.querySelector('#loginMenu'),
+    authRequired = ['/homes', '/edit', '/chat'];
 
 function isAuth(callback) {
     var hashValue = document.location.hash.replace('#', '/');

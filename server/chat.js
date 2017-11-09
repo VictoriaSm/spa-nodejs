@@ -1,36 +1,17 @@
-var router = require('express').Router();
-var jwt = require('jwt-simple');
-var config = require('./config');
-var WebSocketServer = new require('ws');
-var clients = {};
-var webSocketServer = new WebSocketServer.Server({
-    port: 3001
-});
-var userToken;
-router.post('/getToken', function (req, res) {
-    userToken = jwt.decode(req.headers['x-auth'], config.secretKey);
-});
+// var WebSocket = new require('ws'),
+//     // clients = {},
+//     user,
+//     auth = require('./api/auth'),
+//     router = require('express').Router(),
+//     wss = new WebSocket.Server({
+//     port: 3001
+// });
 
-webSocketServer.on('connection', function(ws) {
+var router = require('express').Router(),
+    auth = require('./api/auth');
 
-    var id = Math.random();
-    clients[id] = ws;
-    console.log("новое соединение " + id);
-
-    ws.on('message', function(message) {
-        console.log('получено сообщение ' + message);
-
-        for (var key in clients) {
-            clients[key].send(userToken['username'] + ': ' + message);
-        }
-    });
-
-    ws.on('close', function() {
-        console.log('соединение закрыто ' + id);
-        delete clients[id];
-    });
-
+router.get('/getToken', auth.bearerAuth, function (req, res) {
+    res.json(req.user);
 });
 
-module.exports = webSocketServer;
 module.exports = router;

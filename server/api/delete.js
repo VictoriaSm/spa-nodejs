@@ -1,6 +1,6 @@
-var router = require('express').Router();
-var auth = require('./auth');
-var User = require('../models/user').User;
+var router = require('express').Router(),
+    auth = require('./auth'),
+    User = require('../models/user').User;
 
 router.delete('/delete', auth.bearerAuth, function (req, res) {
     User.remove({_id: req.user['id']}, function (err, user) {

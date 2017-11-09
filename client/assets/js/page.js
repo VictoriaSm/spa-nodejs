@@ -1,7 +1,6 @@
-var el = document.querySelector('#main');
-
-var pageContent = {};
-var scriptFlag = {};
+var el = document.querySelector('#main'),
+    pageContent = {},
+    scriptFlag = {};
 
 function Page( url, needFn ) {
     this.needFn = needFn;

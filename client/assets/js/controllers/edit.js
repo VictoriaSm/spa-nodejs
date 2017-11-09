@@ -27,10 +27,9 @@ function saveProfile() {
         password: document.querySelector('.passwordEdit')
     };
 
-    var user = {};
-
-    var isValid = true;
-    var validConfig = {
+    var user = {},
+        isValid = true,
+        validConfig = {
         name: {
             whiteSpace: false,
             minLength: 3

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var config = require('../config');
+var mongoose = require('mongoose'),
+    config = require('../config');
 
 mongoose.connect(config.mongoose.uri, { useMongoClient: true });
 mongoose.Promise = global.Promise;

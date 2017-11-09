@@ -1,10 +1,11 @@
-var express = require('express');
-var config = require('./config');
-var port = process.env.PORT || config.port;
-var bodyParser = require('body-parser');
-var webSocketServer = require('./chat');
-
-var app = express();
+var express = require('express'),
+    config = require('./config'),
+    port = process.env.PORT || config.port,
+    bodyParser = require('body-parser'),
+    // wss = require('./chat'),
+    app = express(),
+    server = require('http').Server(app),
+    io = require('socket.io')(server);
 
 app.use(express.static(__dirname + "/../client"));
 
@@ -17,6 +18,18 @@ app.use(require('./api/homes'));
 app.use(require('./api/delete'));
 app.use(require('./chat'));
 
-app.listen(port, function () {
+io.on('connection', function(socket){
+    var id = Math.random();
+    console.log("новое соединение " + id);
+    socket.on('message', function(msg){
+        io.emit('message', msg);
+    });
+    socket.on('join', function(room) {
+        socket.join(room);
+        console.log('.................',room);
+    });
+});
+
+server.listen(port, function () {
     console.log('Server running at http://localhost:' + [port]);
 });

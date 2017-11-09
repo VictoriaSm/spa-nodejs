@@ -3,8 +3,8 @@ function formLogin() {
         username: document.querySelector('.loginLog'),
         password: document.querySelector('.passwordLog')
     };
-    var user = {};
-    var isValue = true;
+    var user = {},
+        isValue = true;
 
     var validConfig = {
         username: {

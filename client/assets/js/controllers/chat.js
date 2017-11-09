@@ -1,33 +1,31 @@
-// создать подключение
-var socket = new WebSocket("ws://localhost:3001");
+var userName;
 
-HTTP.post('/getToken', {}, errcb, succb);
-function succb(r) {
+HTTP.get('/getToken', {}, errcb, succb);
+function succb(res) {
+    userName = res.username;
 }
 function errcb(c,e) {
     console.log('.................',c,e);
 }
 
-// отправить сообщение из формы publish
-document.forms.publish.onsubmit = function() {
-    var outgoingMessage = this.message.value;
+var socket = io();
 
-    socket.send(outgoingMessage);
+function chatFunc() {
 
-    document.querySelector('.write-message').value = '';
-    return false;
-};
+    var roomNum = 1;
 
-// обработчик входящих сообщений
-socket.onmessage = function(event) {
-    var incomingMessage = event.data;
-    showMessage(incomingMessage);
-};
+    socket.emit('join', roomNum);
 
-// показать сообщение в div#subscribe
-function showMessage(message) {
-    var messageElem = document.createElement('div');
-    messageElem.classList.add('message');
-    messageElem.appendChild(document.createTextNode(message));
-    document.getElementById('subscribe').appendChild(messageElem);
+    document.forms.publish.onsubmit = function() {
+        socket.emit('message', this.message.value);
+        this.message.value = '';
+        return false;
+    };
+    
+    socket.on('message', function (msg) {
+        var messageElem = document.createElement('div');
+        messageElem.classList.add('message');
+        messageElem.appendChild(document.createTextNode(msg));
+        document.getElementById('subscribe').appendChild(messageElem)
+    });
 }

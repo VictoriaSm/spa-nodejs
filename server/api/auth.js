@@ -1,5 +1,5 @@
-var jwt = require('jwt-simple');
-var config = require('../config');
+var jwt = require('jwt-simple'),
+    config = require('../config');
 
 module.exports.bearerAuth = function (req, res, next) {
     if ( req.headers['x-auth'].length < 10 ) {
