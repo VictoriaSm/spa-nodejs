@@ -28,3 +28,9 @@ function isAuth(callback) {
 function logout() {
     HTTP.setToken(false);
 }
+
+// localStorage.setItem('token', false);
+
+// if ( hash === 'login' || hash === 'register' ) {
+//     localStorage.setItem('token', false);
+// }

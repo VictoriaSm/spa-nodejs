@@ -19,14 +19,8 @@ app.use(require('./api/delete'));
 app.use(require('./chat'));
 
 io.on('connection', function(socket){
-    var id = Math.random();
-    console.log("новое соединение " + id);
     socket.on('message', function(msg){
-        io.emit('message', msg);
-    });
-    socket.on('join', function(room) {
-        socket.join(room);
-        console.log('.................',room);
+        io.emit('message', msg.message);
     });
 });
 

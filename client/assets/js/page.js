@@ -30,6 +30,7 @@ Page.prototype.load = function (path) {
     function render(res){
         el.innerHTML = res;
         pageContent[path] = res;
+        // if ( path === 'chat' ) return;
         _this.execFuncF(path, 'page');
     }
 
