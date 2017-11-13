@@ -16,13 +16,17 @@ var r = new Router(
             templateUrl: 'homes.html',
             func: true
         },
+        chat: {
+            templateUrl: 'chat.html',
+            func: true
+        },
         error: {
             templateUrl: 'error.html',
             func: false
         },
-        chat: {
-            templateUrl: 'chat.html',
-            func: true
+        notFound: {
+            templateUrl: 'notFound.html',
+            func: false
         }
     }
 );

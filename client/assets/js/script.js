@@ -5,32 +5,37 @@ function getUrl( url ){
     return xhr.responseText;
 }
 var homesObj = JSON.parse(getUrl( 'homes.json' )),
-    logoutMenu = document.querySelector('#logoutMenu'),
-    loginMenu = document.querySelector('#loginMenu'),
-    authRequired = ['/homes', '/edit', '/chat'];
+    authRequired = ['#homes', '#edit', '#chat'];
 
 function isAuth(callback) {
-    var hashValue = document.location.hash.replace('#', '/');
+    var hashValue = document.location.hash,
+        logoutMenu = document.querySelector('#logoutMenu'),
+        loginMenu = document.querySelector('#loginMenu');
 
     if ( authRequired.indexOf(hashValue) > -1 ) {
         var t = localStorage.getItem('token');
         if ( t.length > 10 ) {
-            logoutMenu.classList.add('hide-menu');
-            loginMenu.classList.remove('hide-menu');
+            logoutMenu.classList.add('hidden');
+            loginMenu.classList.remove('hidden');
             callback();
         } else {
             //todo redirect
-            document.location.hash = 'login';
+            document.location.hash = '';
         }
-    } else callback();
+    } else {
+        loginMenu.classList.add('hidden');
+        logoutMenu.classList.remove('hidden');
+        if ( hashValue === '' || hashValue === '#register' ) {
+            localStorage.setItem('token', false);
+        }
+        callback();
+    }
 }
 
 function logout() {
     HTTP.setToken(false);
 }
 
-// localStorage.setItem('token', false);
-
-// if ( hash === 'login' || hash === 'register' ) {
-//     localStorage.setItem('token', false);
-// }
+if ( localStorage.getItem('token') === null ) {
+    localStorage.setItem('token', false);
+}

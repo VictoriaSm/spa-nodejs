@@ -12,7 +12,7 @@ function editFunc() {
     }
     function ecb(code, error) {
         if ( code === 401 ) {
-            document.location.hash = 'login';
+            document.location.hash = '';
             logout();
         } else {
             document.location.hash = 'error';
@@ -96,7 +96,7 @@ function saveProfile() {
         }
         function errorHandler(code, error) {
             if ( code === 401 ) {
-                document.location.hash = 'login';
+                document.location.hash = '';
                 logout();
             } else if ( code === 500 ) {
                 document.location.hash = 'error';
@@ -109,12 +109,12 @@ function deleteProfile() {
     HTTP.deleteUser('/delete', {}, ecb, scb);
 
     function scb(res) {
-        document.location.hash = 'login';
+        document.location.hash = '';
         logout();
     }
     function ecb(code, error) {
         if ( code === 401 ) {
-            document.location.hash = 'login';
+            document.location.hash = '';
             logout();
         } else  {
             document.location.hash = 'error';

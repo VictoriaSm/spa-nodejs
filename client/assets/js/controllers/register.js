@@ -107,7 +107,7 @@ function formValidation() {
         HTTP.post('/register', user, errorHandler, render);
 
         function render(res){
-            document.location.hash = "login";
+            document.location.hash = "";
         }
         function errorHandler(code, error) {
             if ( code === 392 ) {

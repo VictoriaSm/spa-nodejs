@@ -2,6 +2,8 @@ var el = document.querySelector('#main'),
     pageContent = {},
     scriptFlag = {};
 
+el.classList.add('animation');
+
 function Page( url, needFn ) {
     this.needFn = needFn;
     this.url = './views/' + url;
@@ -10,13 +12,18 @@ function Page( url, needFn ) {
 }
 
 Page.prototype.addScript =  function ( path ) {
-    var _this = this;
-    var script = document.createElement('script');
+    var _this = this,
+        script = document.createElement('script'),
+        scriptNotRequired = ['error', 'notFound'];
+
+    if ( scriptNotRequired.indexOf(path) > -1 ) {
+        return;
+    }
     script.src = './assets/js/controllers/' + path + '.js';
     document.head.appendChild(script);
-    script.onload = function(){
+    script.onload = function () {
         scriptFlag[path] = true;
-        _this.execFuncF(path,'script');
+        _this.execFuncF(path, 'script');
     }
 };
 
@@ -29,8 +36,8 @@ Page.prototype.load = function (path) {
 
     function render(res){
         el.innerHTML = res;
+
         pageContent[path] = res;
-        // if ( path === 'chat' ) return;
         _this.execFuncF(path, 'page');
     }
 

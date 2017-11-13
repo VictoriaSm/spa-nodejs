@@ -12,15 +12,28 @@ Router.prototype.hashChanged = function () {
     if (window.location.hash.length > 0) {
         isAuth(function () {
             var pageName = window.location.hash.substr(1);
-            var page = _this.routes[pageName].template;
-
-            if ( pageContent[pageName] === undefined ) {
-                page.addScript(pageName);
-                page.load(pageName);
-            } else {
-                page.show(pageName);
-                page.execFunc(pageName);
+            if ( _this.routes[pageName] === undefined || pageName === 'login' ) {
+                pageName = 'notFound';
             }
+
+            var page = _this.routes[pageName].template;
+            viewPage(pageName, page);
         });
+    } else {
+        isAuth(function () {
+            var pageName = 'login';
+            var page = _this.routes[pageName].template;
+            viewPage(pageName, page);
+        });
+    }
+
+    function viewPage(pageName, page) {
+        if ( pageContent[pageName] === undefined ) {
+            page.addScript(pageName);
+            page.load(pageName);
+        } else {
+            page.show(pageName);
+            page.execFunc(pageName);
+        }
     }
 };

@@ -7,6 +7,28 @@ select {
     padding-left: 30px;
 }
 
+textarea {
+    resize: none;
+    outline: none;
+    border-color: #ccc !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn-default {
+    outline: none !important;
+}
+
+#main {
+    display: none;
+}
+
+.animation {
+    display: block !important;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+}
+
 .form-style {
     padding-top: 15px;
 }
@@ -27,10 +49,6 @@ select {
     border: 1px solid #e7e7e7;
     border-radius: 4px;
     padding-bottom: 15px;
-}
-
-.hide-menu {
-    display: none;
 }
 
 .btn-delete {
