@@ -1,42 +1,38 @@
 var token = localStorage.getItem('token');
 var socket = io('',{query: {token: token}});
 
-// HTTP.get('/getToken', {}, errcb, succb);
-// function succb(res) {
-//     localStorage.setItem('user', res.username);
-// }
-// function errcb(c,e) {
-//     console.log('.................',c,e);
-// }
-
 function chatFunc() {
-
-    // var user = localStorage.getItem('user');
-    // console.log('.................',user);
-
-    document.querySelector('textarea').addEventListener('keypress', function (event) {
-        if ( event.keyCode === 13 ) {}
-    });
+    document.querySelector('textarea').onkeydown = function (event) {
+        if ( event.shiftKey && event.keyCode === 13 ) {
+            var text = this.value;
+            this.value = '';
+            socket.emit('message', text, function (data) {
+                createMsg('You: ' + text, 'message');
+            });
+            return false;
+        }
+    };
     document.forms.publish.onsubmit = function () {
         var text = this.message.value;
         this.message.value = '';
         socket.emit('message', text, function (data) {
-            createMsg('You: ' + text);
+            createMsg('You: ' + text, 'message');
         });
         return false;
     };
+    // socket.on('online', function () {
+    //
+    // });
 }
 
 socket.on('message', function (msg) {
-    createMsg(msg.username + ': ' + msg.msg);
-    var userElem = document.createElement('li');
-    userElem.appendChild(document.createTextNode(msg.username));
-    document.getElementById('online-users').appendChild(userElem);
+    createMsg(msg, 'message');
 });
 
-function createMsg(msg) {
-    var messageElem = document.createElement('div');
-    messageElem.classList.add('message');
+function createMsg(msg, style) {
+    var messageElem = document.createElement('div'),
+        list = document.getElementById('subscribe');
+    messageElem.classList.add(style);
     messageElem.appendChild(document.createTextNode(msg));
-    document.getElementById('subscribe').appendChild(messageElem);
+    list.appendChild(messageElem);
 }
