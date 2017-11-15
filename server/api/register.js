@@ -28,7 +28,9 @@ function createUser(req, res){
                             res.status(392).send({message: 'Email already exists', code: 2});
                         } else res.sendStatus(500);
                     }
-                    else res.sendStatus(200);
+                    else {
+                        res.sendStatus(200);
+                    }
                 });
             }
         });

@@ -13,7 +13,7 @@ function authUser(req, res) {
         var username = req.body.username,
             password = req.body.password;
         User.findOne({username: username})
-            .select('password salt')
+            .select('password salt status')
             .exec(function(err, user){
                 if (err) {
                     return res.sendStatus(500);

@@ -1,6 +1,9 @@
 {
   "name": "expressapp",
   "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon server/app.js"
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
@@ -8,6 +11,7 @@
     "jwt-simple": "^0.5.1",
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.4",
+    "redis": "^2.8.0",
     "socket.io": "^2.0.4",
     "ws": "^3.3.0"
   }

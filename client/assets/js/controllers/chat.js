@@ -20,19 +20,39 @@ function chatFunc() {
         });
         return false;
     };
-    // socket.on('online', function () {
-    //
-    // });
+
 }
+
+socket.on('users', function (users) {
+    createOnlineUser(users);
+});
+
+socket.on('user', function (user) {
+    createOnlineUser(user)
+});
 
 socket.on('message', function (msg) {
     createMsg(msg, 'message');
 });
 
+// socket.on('disconnect', function (user) {
+//     var offline = document.querySelector('.online'),
+//         list = document.getElementById('subscribe');
+// });
+
+function createOnlineUser(user) {
+    var online = document.createElement('div');
+    online.innerHTML = user;
+    online.classList.add('online');
+    document.querySelector('#online-div').appendChild(online);
+}
+
 function createMsg(msg, style) {
     var messageElem = document.createElement('div'),
-        list = document.getElementById('subscribe');
+        list = document.getElementById('subscribe'),
+        div = document.querySelector('.block');
     messageElem.classList.add(style);
     messageElem.appendChild(document.createTextNode(msg));
     list.appendChild(messageElem);
+    div.scrollTop = div.scrollHeight;
 }

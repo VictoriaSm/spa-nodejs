@@ -84,21 +84,15 @@ textarea {
 }
 
 .message {
-    /*background-color: #f7f7f7;*/
-    /*border-radius: 4px;*/
     display: block;
     padding: 3px 6px 3px 6px;
     margin: 5px 10px;
     animation: msg .4s;
 }
 
-/*.your-message {*/
-    /*background-color: #fff;*/
-    /*display: block;*/
-    /*padding: 3px 6px 3px 6px;*/
-    /*margin: 5px 10px;*/
-    /*animation: msg .4s;*/
-/*}*/
+.online {
+    margin: 5px 10px;
+}
 
 #online-div {
     background-color: #ffffff;
@@ -119,8 +113,8 @@ textarea {
 }
 
 .overflow {
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
 }
 
 .block {
@@ -129,7 +123,7 @@ textarea {
     border-radius: 4px;
     background-color: #ffffff;
     border: 1px solid #ccc;
-    position: relative;
+    /*position: relative;*/
     overflow: auto;
 }
 

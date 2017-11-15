@@ -40,6 +40,10 @@ var schema = new Schema({
     gender: {
         type: String,
         required: false
+    },
+    status: {
+        type: String,
+        default: 'offline'
     }
 });
 
