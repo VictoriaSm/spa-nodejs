@@ -2,7 +2,7 @@
   "name": "expressapp",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server/app.js"
+    "start": "node-dev server/app.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

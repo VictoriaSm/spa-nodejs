@@ -1,3 +1,7 @@
+body {
+    color: #747474 !important;
+}
+
 label {
     font-size: 16px;
     font-weight: bold;
@@ -99,7 +103,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     min-height: 300px;
-    margin-top: 15px;
+    margin: 15px 0;
 }
 
 .chatForm > div:first-child {
@@ -112,19 +116,29 @@ textarea {
     border-bottom: 1px solid #e2e2e2;
 }
 
-.overflow {
-    /*position: absolute;*/
-    /*bottom: 0;*/
+.block {
+    height: 330px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.block {
+.block > span {
+    font-size: 20px;
+}
+
+.overflow {
     margin-top: 15px;
     height: 250px;
     border-radius: 4px;
     background-color: #ffffff;
     border: 1px solid #ccc;
-    /*position: relative;*/
     overflow: auto;
+}
+
+.cursor {
+    cursor: pointer;
+    text-decoration: none !important;
 }
 
 @keyframes msg {
