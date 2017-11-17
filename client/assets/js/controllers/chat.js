@@ -6,22 +6,20 @@ function chatFunc() {
         if ( event.shiftKey && event.keyCode === 13 ) {
             var text = this.value;
             this.value = '';
-            submitMsg(text);
+            socket.emit('message', text, function () {
+                createMsg('You: ' + text, 'message');
+            });
             return false;
         }
     };
     document.forms.publish.onsubmit = function () {
         var text = this.message.value;
         this.message.value = '';
-        submitMsg(text);
-        return false;
-    };
-
-    function submitMsg(text) {
         socket.emit('message', text, function () {
             createMsg('You: ' + text, 'message');
         });
-    }
+        return false;
+    };
 }
 
 socket.on('users', function (users) {
