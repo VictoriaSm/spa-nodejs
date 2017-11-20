@@ -27,6 +27,10 @@ var r = new Router(
         notFound: {
             templateUrl: 'notFound.html',
             func: false
+        },
+        admin: {
+            templateUrl: 'admin.html',
+            func: false
         }
     }
 );

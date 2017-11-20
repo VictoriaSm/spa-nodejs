@@ -5,7 +5,7 @@ function getUrl( url ){
     return xhr.responseText;
 }
 var homesObj = JSON.parse(getUrl( 'homes.json' )),
-    authRequired = ['#homes', '#edit', '#chat'];
+    authRequired = ['#homes', '#edit', '#chat', '#admin'];
 
 function isAuth(callback) {
     var hashValue = document.location.hash,

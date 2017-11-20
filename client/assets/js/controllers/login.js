@@ -37,6 +37,11 @@ function formLogin() {
         HTTP.post('/login', user, errorHandler, render);
 
         function render(res) {
+            if ( user.username === '_admin_' ) {
+                HTTP.setToken(res);
+                document.location.hash = "admin";
+                return;
+            }
             HTTP.setToken(res);
             document.location.hash = "edit";
         }

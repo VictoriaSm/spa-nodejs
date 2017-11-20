@@ -1,4 +1,5 @@
 var el = document.querySelector('#main'),
+    nav = document.querySelector('#nav'),
     pageContent = {},
     scriptFlag = {};
 
@@ -15,7 +16,7 @@ Page.prototype.addScript =  function ( path ) {
     var _this = this,
         script = document.createElement('script'),
         scriptNotRequired = ['error', 'notFound'];
-
+    if ( path === 'admin' ) nav.classList.add('hidden');
     if ( scriptNotRequired.indexOf(path) > -1 ) {
         return;
     }

@@ -13,26 +13,29 @@ function authUser(req, res) {
         var username = req.body.username,
             password = req.body.password;
         User.findOne({username: username})
-            .select('password salt status')
+            .select('password salt')
             .exec(function(err, user){
-                if (err) {
-                    return res.sendStatus(500);
-                }
+                error(err);
                 if (!user) {
                     return res.status(391.1).send({message: 'Username does not exist', code: 1});
                 }
                 password += username;
                 var hash = user.salt + user.password;
                 bcrypt.compare(password, hash, function(err, valid){
-                    if (err) {
-                        return res.sendStatus(500);
-                    }
+                    error(err);
                     if (!valid){
                         return res.status(391.2).send({message: 'Password incorrect', code: 2});
                     }
                     var token = jwt.encode({username: username, id: user._id}, config.secretKey);
+
                     res.send(token);
                 });
+
+                function error(err) {
+                    if (err) {
+                        return res.sendStatus(500);
+                    }
+                }
             });
     }
 }
