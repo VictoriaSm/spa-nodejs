@@ -1,7 +1,7 @@
 var jwt = require('jwt-simple'),
     config = require('./config'),
     redis = require('redis'),
-    Message = require('./models/message').Message,
+    message = require('./models/message'),
     rooms = [];
 
 module.exports = function (server) {
@@ -35,35 +35,39 @@ module.exports = function (server) {
                 }
             });
 
-            var message = new Message;
-
             if ( room.length !== 0 ) {
                 socket.join(room.join(''));
                 sendRoom = room.join('');
-                console.log('.................',123);
-                message.room = room;
-                console.log('.................',123);
-                message.save(function (err) {
-                    if ( err ) console.log('.................',err);
-                });
 
             } else {
                 var newRoom = socket.decoded.username + ' ' + user;
                 rooms.push(newRoom);
                 socket.join(newRoom);
                 sendRoom = newRoom;
-                message.room = newRoom;
-                message.save(function (err) {
-                    if ( err ) console.log('.................',err);
-                });
             }
+
+            message.messages.find({room: sendRoom})
+                .sort({date: 1})
+                .exec(function (err, reply) {
+                    socket.emit('history', reply);
+                });
         });
 
-        socket.on('message', function(msg, cb){
-            var username = socket.decoded.username[0].toUpperCase() + socket.decoded.username.substr(1);
-            socket.in(sendRoom).broadcast.emit('message', username + ': ' + msg);
-            Message.find({room: sendRoom}, function (msg) {
-                console.log('.................',msg);
+        socket.on('message', function(data, cb){
+            var username = socket.decoded.username[0].toUpperCase() + socket.decoded.username.substr(1),
+                msg = username + ': ' + data;
+
+            var receiver = sendRoom.split(' ').filter(function (t) {
+                return t !== socket.decoded.username;
+            }).join('');
+
+            socket.in(sendRoom).broadcast.emit('message', msg);
+            message.messages.create({
+                "message": data,
+                "sender" : socket.decoded.username,
+                "receiver": receiver,
+                "room": sendRoom,
+                "date" : new Date()
             });
             cb && cb();
         });

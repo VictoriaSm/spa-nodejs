@@ -56,9 +56,11 @@ function createOnlineUser(user) {
         var online = document.createElement('div'),
             link = document.createElement('a'),
             block = document.querySelector('.block'),
-            chat = document.querySelector('.chat');
+            chat = document.querySelector('.chat'),
+            list = document.getElementById('subscribe');
         online.innerHTML = user;
         online.classList.add('online');
+
         document.querySelector('#online-div').appendChild(link);
         link.appendChild(online);
         link.classList.add('cursor');
@@ -67,6 +69,18 @@ function createOnlineUser(user) {
             block.classList.remove('block');
             chat.classList.remove('hidden');
             socket.emit('dialog', user);
+
+            socket.on('history', function (data) {
+                list.innerHTML = '';
+                data.forEach(function (msg) {
+                    if ( msg.receiver === user ) {
+                        createMsg('You: ' + msg.message, 'message');
+                    } else {
+                        var sender = msg.sender[0].toUpperCase() + msg.sender.substr(1);
+                        createMsg(sender + ': ' + msg.message, 'message');
+                    }
+                });
+            })
         };
     }
 }
