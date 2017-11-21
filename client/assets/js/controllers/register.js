@@ -79,6 +79,10 @@ function formValidation() {
                         userInfo[key].nextElementSibling.innerHTML = '';
                         user[key] = userInfo[key].value.trim();
                     }
+                } else {
+                    userInfo[key].classList.remove('error');
+                    userInfo[key].nextElementSibling.innerHTML = '';
+                    user[key] = userInfo[key].value.trim();
                 }
             } else {
                 userInfo[key].classList.remove('error');

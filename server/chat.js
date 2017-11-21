@@ -54,7 +54,7 @@ module.exports = function (server) {
         });
 
         socket.on('message', function(data, cb){
-            var username = socket.decoded.username[0].toUpperCase() + socket.decoded.username.substr(1),
+            var username = socket.decoded.username,
                 msg = username + ': ' + data;
 
             var receiver = sendRoom.split(' ').filter(function (t) {

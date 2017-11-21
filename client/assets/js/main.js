@@ -30,7 +30,7 @@ var r = new Router(
         },
         admin: {
             templateUrl: 'admin.html',
-            func: false
+            func: true
         }
     }
 );

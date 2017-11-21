@@ -76,8 +76,7 @@ function createOnlineUser(user) {
                     if ( msg.receiver === user ) {
                         createMsg('You: ' + msg.message, 'message');
                     } else {
-                        var sender = msg.sender[0].toUpperCase() + msg.sender.substr(1);
-                        createMsg(sender + ': ' + msg.message, 'message');
+                        createMsg(msg.sender + ': ' + msg.message, 'message');
                     }
                 });
             })
