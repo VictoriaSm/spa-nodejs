@@ -146,108 +146,134 @@ textarea {
 .flex-container {
     display: -webkit-flex;
     display: flex;
-    align-items: stretch;
+    /* align-items: stretch; */
     height: 100vh;
+    background: linear-gradient(45deg, #14182d, #3d4152);
+    flex-direction: column;
+    color: #a7b0cc;
 }
 
 .flex-container > * {
-    padding-top: 40px;
+    margin: 0 40px 0 40px;
+}
+
+.flex-nav {
+    display: flex;
+    background: linear-gradient(to right, #262e48, #53586b);
+    margin: 0;
+    margin-bottom: 40px;
+    border-radius: 0;
+    /* height: 5%; */
+    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+}
+.flex-nav > div {
+    margin: 30px 80px 0 40px;
     font-size: 20px;
 }
 
-.sidebar-left {
-    flex-grow: 0.5;
-    background-color: #f8f8f8;
-    border: 1px solid #e7e7e7;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-left > * {
-    padding: 15px 0 15px 25px;
-}
-
-.sidebar-left > *:hover, .sidebar-left > *:focus {
-    transition: .5s;
-    text-decoration: none;
-    background-color: #337ab7;
-    color: #fff
-}
-
-.flex-container > div:last-child {
-    flex-grow: 5;
-}
-
-.flex-item {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.flex-item > div {
-    border: 1px solid #e7e7e7;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    margin: 0 20px 0 20px;
-}
-
-.head {
-    background-color: #337ab7;
-    color: #fff;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-.head > ul {
+.nav-list {
     list-style: none;
 }
 
-.head > ul > li {
+.nav-list > * {
     float: left;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 30px 20px;
 }
 
-.select {
-    background-color: #fff;
-    color: #747474;
+.quantity {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+    border-radius: 4px;
+}
+
+.quantity-head {
+    background: linear-gradient(to right, #262e48, #53586b);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.quantity-head, .user-head, .online-head, .msg-head{
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+.quantity-content, .quantity-data {
+    background: linear-gradient(to right, #1f2741, #42445a);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: flex;
+}
+.quantity-content {
+    color: #52587f;
+}
+.quantity-content > div, .quantity-data > div {
+    width: 33%;
+    padding: 30px;
+}
+.quantity-data > div {
+    display: flex;
+    align-content: center;
+}
+
+.flex-item {
+    margin-top: 40px; 
+    display: flex;
+}
+
+.all-user, .all-online {
+    width: 30%;
+    margin-right: 40px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+    border-radius: 14px;
+}
+.all-message {
+    width: 40%;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+    border-radius: 14px;
+}
+
+.user-head {
+    background: linear-gradient(to right, #242c46, #282f4a);
+}
+.online-head {
+    background: linear-gradient(to right, #292f4a, #323651);
+}
+.msg-head {
+    background: linear-gradient(to right, #343753, #4a4c63);
+}
+.user-head, .online-head, .msg-head {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 
+.user-content {
+    background: linear-gradient(to right, #1e263f, #222742);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 4px;
+}
+.online-content {
+    background: linear-gradient(to right, #212742, #2a2f49);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.msg-content {
+    background: linear-gradient(to right, #2c2f4a, #41445b);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 14px;
+}
+.user-content, .online-content, .msg-content {
+    padding: 30px;
+}
+
 .user-table {
-    padding: 40px;
-}
-
-.header-table > div {
     display: flex;
-    background-color: #f8f8f8;
-    border: 2px solid #fff;
-    justify-content: center;
+    color: #52587f;
 }
 
-.content-table > div {
-    margin: 10px;
+.user-table > div {
+    width: 33%;
 }
 
 @keyframes msg {
     0% { height: 0; }
     100% { height: 20px; }
-}
-
-.wrap {
-    display: flex;
-    width: 100% ;
-    /*justify-content: center;*/
-}
-.wrap > div {
-    display: flex;
-    height: 3rem;
-    /*align-items: center;*/
-    width: 20%;
-}
-
-.wrap > div:last-child {
-    justify-content: center;
 }

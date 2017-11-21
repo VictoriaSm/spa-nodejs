@@ -1,44 +1,45 @@
 <div class="flex-container">
-    <div class="sidebar-left">
-        <a href="">
+    <div class="flex-nav">
+        <div>
+            <p>Admin panel</p>
+        </div>
+        <ul class="nav-list">
+            <li>Users</li>
+            <li>Messages</li>
+            <li>Log out</li>
+        </ul>
+    </div>
+    <div class="quantity">
+        <div class="quantity-head">Summary data</div>
+        <div class="quantity-content">
             <div>Users</div>
-        </a>
-        <a href="">
-            <div>Something</div>
-        </a>
-        <a href="#">
-            <div>Log out</div>
-        </a>
+            <div>Online</div>
+            <div>Messages</div>
+        </div>
+        <div class="quantity-data">
+            <div>Users</div>
+            <div>Online</div>
+            <div>Messages</div>
+        </div>
     </div>
     <div class="flex-item">
-        Users
-        <hr>
-        <div>
-            <div class="head">
-                <ul class="cursor">
-                    <li class="select">All users</li>
-                    <li>Online</li>
-                </ul>
-            </div>
-            <div class="all-user">
+        <div class="all-user">
+            <div class="user-head">Users</div>
+            <div class="user-content">
                 <div class="user-table">
-                    <div class="wrap header-table">
-                        <div>Login</div>
-                        <div>Email</div>
-                        <div>Name</div>
-                        <div>Age</div>
-                        <div>Delete</div>
-                    </div>
-                    <div class="wrap content-table">
-                        <div>test</div>
-                        <div>qedq@da.da</div>
-                        <div>Thomas</div>
-                        <div>24</div>
-                        <div><button class="btn btn-danger">Delete</button></div>
-                    </div>
+                    <div>Login</div>
+                    <div>Email</div>
+                    <div>Name</div>
                 </div>
             </div>
-            <div class="online-user"></div>
+        </div>
+        <div class="all-online">
+            <div class="online-head">Online</div>
+            <div class="online-content">Online</div>
+        </div>
+        <div class="all-message">
+            <div class="msg-head">Message</div>
+            <div class="msg-content">All message</div>
         </div>
     </div>
 </div>
