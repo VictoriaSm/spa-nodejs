@@ -10,8 +10,29 @@
     <title>Document</title>
 </head>
 <body>
+<div class="flex-container">
+    <div class="flex-nav">
+        <div>
+            <p>Admin panel</p>
+        </div>
+        <ul class="nav-list hidden" id="adminMenu">
+            <li><a href="#users">Users</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#">Log out</a></li>
+        </ul>
+        <ul class="nav-list" id="logoutMenu">
+            <li><a href="#">Sign in</a></li>
+            <li><a href="#register">Sign up</a></li>
+        </ul>
+        <ul class="nav-list" id="loginMenu">
+            <li><a href="#chat">Chat</a></li>
+            <li><a href="#homes">Homes</a></li>
+            <li><a href="#edit">Edit profile</a></li>
+            <li><a href="#" onclick="return logout()">Log out</a></li>
+        </ul>
+    </div>
 
-<div class="nav" id="nav">
+<!-- <div class="nav" id="nav">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -30,10 +51,10 @@
             </ul>
         </div>
     </nav>
+</div> -->
+
+    <div id="main"></div>
 </div>
-
-<div id="main"></div>
-
 </body>
 <footer>
     <script src="assets/js/libs/homekit.vanilla_tools.js"></script>

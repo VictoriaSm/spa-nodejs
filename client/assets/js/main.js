@@ -31,6 +31,14 @@ var r = new Router(
         admin: {
             templateUrl: 'admin.html',
             func: true
+        },
+        users: {
+            templateUrl: 'admin/users.html',
+            func: false
+        },
+        messages: {
+            templateUrl: 'admin/messages.html',
+            func: false
         }
     }
 );

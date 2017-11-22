@@ -1,12 +1,12 @@
 var jwt = require('jwt-simple'),
     config = require('./config'),
     redis = require('redis'),
+    client = redis.createClient(),
     message = require('./models/message'),
     rooms = [];
 
 module.exports = function (server) {
     var io = require('socket.io')(server),
-        client = redis.createClient(),
         sendRoom;
 
     io.on('connection', function(socket){

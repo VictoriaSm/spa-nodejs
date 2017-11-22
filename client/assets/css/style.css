@@ -154,6 +154,13 @@ textarea {
     font-family: 'Alegreya Sans', sans-serif;
     font-size: 16px;
 }
+.flex-container a {
+    color: #a7b0cc;
+}
+.flex-container a:hover, .flex-container a:focus {
+    color: #939dbb;
+    text-decoration: none;
+}
 
 .flex-container > * {
     margin: 0 40px 0 40px;
@@ -228,7 +235,7 @@ textarea {
     display: flex;
 }
 
-.all-online {
+.all-online, .all-online, .all-message {
     display: flex;
     flex-direction: column;
 }
@@ -251,7 +258,7 @@ textarea {
     background: linear-gradient(45deg, #292f4a, #323651);
 }
 .msg-head {
-    background: linear-gradient(45deg, #343753, #4a4c63);
+    background: linear-gradient(45deg, #323651, #42455b);
 }
 .user-head, .online-head, .msg-head {
     border-top-left-radius: 4px;
@@ -267,15 +274,15 @@ textarea {
     background: linear-gradient(45deg, #212742, #2a2f49);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    flex-grow: 1;
 }
 .msg-content {
-    background: linear-gradient(45deg, #2c2f4a, #41445b);
+    background: linear-gradient(45deg, #282d48, #383c53);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 14px;
 }
 .user-content, .online-content, .msg-content {
     padding: 30px 30px 15px 30px;
+    flex-grow: 1;
 }
 
 .user-table-head, .online-table-head, .msg-table-head {

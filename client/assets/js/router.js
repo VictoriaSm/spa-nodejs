@@ -3,6 +3,7 @@ function Router(routes) {
         item.template = item.template || new Page(item.templateUrl, item.func);
     });
     this.routes = routes;
+    console.log(this.routes);
     window.onhashchange = this.hashChanged.bind(this);
     this.hashChanged();
 }

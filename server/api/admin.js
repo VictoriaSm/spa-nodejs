@@ -6,8 +6,7 @@ var router = require('express').Router(),
 router.get('/allInfo', getAllUser);
 
 function getAllUser(req, res) {
-    var data = {},
-        client = redis.createClient();
+    var data = {};
     User.find({username: {$ne: '_admin_'}}, {_id: 0, username: 1, email: 1, name: 1})
         .sort({ $natural: -1 })
         .limit(10)
@@ -21,21 +20,22 @@ function getAllUser(req, res) {
             data.users = user;
         });
 
-    client.hgetall('online', function (err, obj) {
-        console.log('.................',obj);
+    // client.hgetall('online', function (err, obj) {
+    //     console.log('.................',obj);
 
-        // data.online;
-    });
+    //     // data.online;
+    // });
 
     message.messages.find({}, {_id: 0, room: 1, sender: 1, receiver: 1, message: 1})
-        .sort({data: -1})
+        .sort({$natural: -1})
         .limit(10)
         .exec(function (err, msg) {
             if (err) {
                 return res.sendStatus(500);
             }
             data.msg = msg;
-            res.send(data);
+            res.json({users: data.users,
+            msg: data.msg});
         });
 }
 
