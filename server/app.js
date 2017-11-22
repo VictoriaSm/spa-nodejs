@@ -15,6 +15,7 @@ app.use(require('./api/edit'));
 app.use(require('./api/homes'));
 app.use(require('./api/delete'));
 app.use(require('./api/admin'));
+app.use(require('./api/admin/users'));
 app.use(require('./chat'));
 
 require('./chat')(server);

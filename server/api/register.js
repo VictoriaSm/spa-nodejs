@@ -10,6 +10,7 @@ function createUser(req, res){
     user.email = req.body.email;
     user.name = req.body.name;
     user.age = req.body.age;
+    user.gender = '';
     var password = req.body.password + user.username;
     var saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {

@@ -218,17 +218,26 @@ textarea {
     width: 33%;
     padding: 30px 100px 0;
 }
-.quantity-data, .flex-users, .flex-msg, .all-users-table-head,
-.all-online-table-head, .table-content, .all-msg-table-head {
+.quantity-data, .flex-users, .flex-msg, .all-online-table-head,
+.table-content, .all-msg-table-head {
     display: flex;
 }
 .quantity-data > div, .count-user {
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    text-align: center;
     font-size: 100px;
     color: #fff;
     width: 33%;
     padding: 0 30px 10px;
+}
+.quantity-data i {
+    background: linear-gradient(45deg, #d87784, #8b56cb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #0B2349;
+    font-size: 80px;
+    margin-right: 20px;
 }
 
 .flex-item {
@@ -296,7 +305,8 @@ textarea {
     flex-grow: 1;
 }
 
-.user-table-head, .online-table-head, .msg-table-head {
+.user-table-head, .online-table-head, .msg-table-head,
+.all-users-table-head {
     display: flex;
     color: #52587f;
 }
@@ -304,13 +314,13 @@ textarea {
 .user-table-head > div, .online-table-head > div, .new-user{
     width: 33%;
 }
-.new-user, .new-msg, .new-online {
+.new-user, .new-msg, .new-online, .new-all-user {
     padding-left: 10px;
 }
 .msg-table-head > div, .new-msg {
     width: 25%;
 }
-.user-table > div, .online-table > div, .msg-table > div {
+.table-content {
     margin-bottom: 15px;
 }
 
@@ -334,7 +344,7 @@ textarea {
     border-top-left-radius: 4px;
     border-top-right-radius: 14px;
 }
-.all-users-table-head > div, .all-msg-table-head > div {
+.all-users-table-head > div, .all-msg-table-head > div, .new-all-user {
     width: 16%;
     margin-right: 10px;
 }

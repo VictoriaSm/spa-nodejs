@@ -1,12 +1,15 @@
 function adminFunc() {
-    HTTP.get('/allInfo', {}, ecb, scb);
+    HTTP.get('/getInfo', {}, ecb, scb);
 
     function scb(res) {
+        var i = 2;
         for ( var key in res.count ) {
-            var countUser = document.querySelector('.quantity-data');
-            countUser.insertBefore(document.createElement('div'), countUser.firstChild);
-            countUser.firstChild.classList.add('count-user');
-            countUser.firstChild.innerHTML = res.count[key];
+            var countUser = document.querySelector('.quantity-data').children[i],
+                numb = res.count[key];
+            countUser.appendChild(document.createTextNode(numb));
+            countUser.classList.add('count-user');
+            // countUser.firstChild.innerHTML = res.count[key];
+            i--;
         }
 
         for ( var key in res.online ) {
@@ -37,10 +40,14 @@ function adminFunc() {
             table.appendChild(content);
 
             for ( var key in data ) {
-                if ( data[key] === '' ) data[key] = 'not specified';
                 content.insertBefore(document.createElement('div'), content.firstChild);
                 content.firstChild.classList.add(style);
-                if ( data[key].length > 15 ) {
+                if ( data[key] === '' ) {
+                    var i = document.createElement('i');
+                    i.classList.add('fa');
+                    i.classList.add('fa-times');
+                    content.firstChild.appendChild(i);
+                } else if ( data[key].length > 15 ) {
                     content.firstChild.innerHTML = data[key].slice(0, 15) + '...';
                 } else content.firstChild.innerHTML = data[key];
             }
@@ -48,6 +55,6 @@ function adminFunc() {
 
     }
     function ecb(code, err) {
-        console.log('.................', code, err);
+        console.log(code, err);
     }
 }
