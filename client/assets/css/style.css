@@ -146,7 +146,6 @@ textarea {
 .flex-container {
     display: -webkit-flex;
     display: flex;
-    /* align-items: stretch; */
     height: 100vh;
     background: linear-gradient(45deg, #14182d, #3d4152);
     flex-direction: column;
@@ -171,9 +170,13 @@ textarea {
     background: linear-gradient(45deg, #262e48, #53586b);
     margin: 0 0 40px 0;
     border-radius: 0;
-    /* height: 5%; */
+}
+
+.flex-nav, .quantity, .user, .users-online, .msg,
+.all-users, .all-online, .all-msg, .dialog {
     box-shadow: 0 14px 28px rgba(0,0,0,0.15);
 }
+
 .flex-nav > div {
     margin: 30px 80px 0 40px;
     font-size: 22px;
@@ -188,18 +191,14 @@ textarea {
     padding: 30px 20px;
 }
 
-.quantity {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
-    border-radius: 4px;
-}
-
-.quantity-head, .all-msg-head {
-    background: linear-gradient(45deg, #262e48, #53586b);
+.quantity-head {
+    background: linear-gradient(45deg, #262e48, #515569);
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
 }
 
-.quantity-head, .user-head, .online-head, .msg-head, .all-users-head, .all-online-head, .all-msg-head{
+.quantity-head, .user-head, .online-head, .msg-head, .all-users-head,
+.all-online-head, .all-msg-head, .dialog-head{
     font-size: 20px;
     padding: 10px 20px;
 }
@@ -210,7 +209,8 @@ textarea {
     border-bottom-right-radius: 4px;
     flex-direction: column;
 }
-.quantity-content-head {
+.quantity-content-head, .all-online-table-head, .all-users-table-head,
+.all-msg-table-head {
     display: flex;
     color: #5c6286;
 }
@@ -218,13 +218,11 @@ textarea {
     width: 33%;
     padding: 30px 100px 0;
 }
-.quantity-data, .flex-users, .flex-msg, .all-online-table-head,
-.table-content, .all-msg-table-head {
+.quantity-data, .flex-users, .flex-msg,
+.table-content {
     display: flex;
 }
 .quantity-data > div, .count-user {
-    /*display: flex;*/
-    /*justify-content: center;*/
     text-align: center;
     font-size: 100px;
     color: #fff;
@@ -251,7 +249,6 @@ textarea {
 }
 .user, .users-online {
     margin-right: 40px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
     border-radius: 14px;
 }
 .user {
@@ -262,7 +259,6 @@ textarea {
 }
 .msg {
     width: 45%;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
     border-radius: 14px;
 }
 
@@ -300,13 +296,12 @@ textarea {
     border-bottom-right-radius: 14px;
 }
 .user-content, .online-content, .msg-content,
-.all-users-content, .all-online-content, .all-msg-content {
+.all-users-content, .all-online-content {
     padding: 30px 30px 15px 30px;
     flex-grow: 1;
 }
 
-.user-table-head, .online-table-head, .msg-table-head,
-.all-users-table-head {
+.user-table-head, .online-table-head, .msg-table-head {
     display: flex;
     color: #52587f;
 }
@@ -325,15 +320,29 @@ textarea {
 }
 
 .all-users {
-    width: 70%;
+    width: 80%;
     margin-right: 40px;
 }
 .all-online {
-    width: 30%;
+    width: 20%;
 }
-.all-msg, .new-online {
+.all-msg {
+    width: 20%;
+    margin-right: 40px;
+    border-radius: 14px 4px 4px 14px;
+    background: linear-gradient(45deg, #1f2741, #30344f);
+}
+.dialog {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px 14px 14px 4px;
+    background: linear-gradient(45deg, #282e48, #42455b);
+}
+.new-online, .all-online-table-head > div {
     flex-grow: 1;
 }
+
 .all-users-head {
     background: linear-gradient(45deg, #262e48, #3e405b);
     border-top-left-radius: 14px;
@@ -344,28 +353,53 @@ textarea {
     border-top-left-radius: 4px;
     border-top-right-radius: 14px;
 }
-.all-users-table-head > div, .all-msg-table-head > div, .new-all-user {
+.all-msg-head {
+    background: linear-gradient(45deg, #262e48, #3a3b57);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 4px;
+}
+.dialog-head {
+    background: linear-gradient(45deg, #3a3c58, #53586b);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 14px;
+}
+
+.all-users-table-head > div, .new-all-user {
     width: 16%;
     margin-right: 10px;
 }
-.all-online-table-head > div {
-    width: 50%;
+.msg-table-content {
+    display: flex;
+    margin-bottom: 15px;
+}
+.all-msg-table-head > div, .new-all-msg {
+    width: 80%;
     margin-right: 10px;
 }
+.div-icon, .all-msg-table-head > div:last-child {
+    width: 20%;
+    margin-right: 10px;
+}
+.div-icon {
+    padding-left: 10px;
+}
+
 .all-users-content {
-    background: linear-gradient(45deg, #23293f, #383a52);
+    background: linear-gradient(45deg, #1f2741, #383a52);
     border-bottom-left-radius: 14px;
     border-bottom-right-radius: 4px;
 }
 .all-online-content {
-    background: linear-gradient(45deg, #33344f, #4a4c5f);
+    background: linear-gradient(45deg, #33344f, #42445a);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 14px;
 }
-.all-msg-content {
-    background: linear-gradient(45deg, #1f2741, #42445a);
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
+
+.dialog-content, .all-msg-content {
+    flex-grow: 1;
+    padding: 30px 30px 15px 30px;
+    max-height: 700px;
+    overflow: auto;
 }
 
 @keyframes msg {

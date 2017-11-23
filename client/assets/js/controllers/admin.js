@@ -45,7 +45,7 @@ function adminFunc() {
                 if ( data[key] === '' ) {
                     var i = document.createElement('i');
                     i.classList.add('fa');
-                    i.classList.add('fa-times');
+                    i.classList.add('fa-minus');
                     content.firstChild.appendChild(i);
                 } else if ( data[key].length > 15 ) {
                     content.firstChild.innerHTML = data[key].slice(0, 15) + '...';

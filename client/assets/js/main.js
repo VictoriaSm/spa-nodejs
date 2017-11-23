@@ -38,7 +38,7 @@ var r = new Router(
         },
         messages: {
             templateUrl: 'admin/messages.html',
-            func: false
+            func: true
         }
     }
 );

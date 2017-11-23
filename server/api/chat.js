@@ -1,9 +1,9 @@
 var jwt = require('jwt-simple'),
-    config = require('./config'),
+    config = require('../config'),
+    async = require('async'),
     redis = require('redis'),
     client = redis.createClient(),
-    message = require('./models/message'),
-    rooms = [];
+    message = require('../models/message');
 
 module.exports = function (server) {
     var io = require('socket.io')(server),
@@ -25,32 +25,38 @@ module.exports = function (server) {
         socket.broadcast.emit('user', socket.decoded.username);
 
         socket.on('dialog', function (user) {
-            var room = rooms.filter(function (item) {
-                var arr = item.split(' ').filter(function (item) {
-                    return ( item === user || item === socket.decoded.username );
+            async.parallel([function (cb) {
+                client.hvals('rooms', function (err, rooms) {
+                    var room = rooms.filter(function (item) {
+                        var arr = item.split(' ').filter(function (item) {
+                            return ( item === user || item === socket.decoded.username );
+                        });
+                        if ( arr.length === 2 ) {
+                            return arr.join(' ');
+                        }
+                    });
+
+                    if ( room.length !== 0 ) {
+                        socket.join(room.join(''));
+                        sendRoom = room.join('');
+
+                    } else {
+                        var newRoom = socket.decoded.username + ' ' + user;
+                        client.hmset('rooms', newRoom, newRoom);
+                        socket.join(newRoom);
+                        sendRoom = newRoom;
+                    }
+                    cb();
                 });
-                if ( arr.length === 2 ) {
-                    var str = arr.join(' ');
-                    return str;
-                }
+            }], function (err) {
+                if ( err ) console.log(err);
+                message.messages.find({room: sendRoom})
+                    .sort({date: 1})
+                    .exec(function (err, reply) {
+                        socket.emit('history', reply);
+                    });
             });
 
-            if ( room.length !== 0 ) {
-                socket.join(room.join(''));
-                sendRoom = room.join('');
-
-            } else {
-                var newRoom = socket.decoded.username + ' ' + user;
-                rooms.push(newRoom);
-                socket.join(newRoom);
-                sendRoom = newRoom;
-            }
-
-            message.messages.find({room: sendRoom})
-                .sort({date: 1})
-                .exec(function (err, reply) {
-                    socket.emit('history', reply);
-                });
         });
 
         socket.on('message', function(data, cb){
@@ -64,8 +70,8 @@ module.exports = function (server) {
             socket.in(sendRoom).broadcast.emit('message', msg);
             message.messages.create({
                 "message": data,
-                "sender" : socket.decoded.username,
                 "receiver": receiver,
+                "sender" : socket.decoded.username,
                 "room": sendRoom,
                 "date" : new Date()
             });

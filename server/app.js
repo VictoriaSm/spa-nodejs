@@ -16,9 +16,11 @@ app.use(require('./api/homes'));
 app.use(require('./api/delete'));
 app.use(require('./api/admin'));
 app.use(require('./api/admin/users'));
-app.use(require('./chat'));
+app.use(require('./api/admin/messages'));
+app.use(require('./api/admin/delete'));
+app.use(require('./api/chat'));
 
-require('./chat')(server);
+require('./api/chat')(server);
 
 server.listen(port, function () {
     console.log('Server running at http://localhost:' + [port]);
