@@ -6,5 +6,5 @@ module.exports.messages = mongoose.model('message', new SchemaMsg({
     sender: String,
     receiver: String,
     room: String,
-    date: Date
+    date: String
 }));

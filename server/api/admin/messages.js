@@ -8,7 +8,7 @@ router.post('/dialogMsg', getDialogMsg);
 
 function getAllRooms(req, res) {
 
-    client.hgetall('rooms', function (err, obj) {
+    client.hvals('rooms', function (err, obj) {
         if (obj !== null) {
             res.json(obj);
         }
@@ -18,7 +18,7 @@ function getAllRooms(req, res) {
 function getDialogMsg(req, res) {
     message.messages.find({room: req.body.room})
         .select('-_id date sender message')
-        .sort({date: 1})
+        .sort({date: -1})
         .exec(function (err, msg) {
             if (err) {
                 return res.sendStatus(500);

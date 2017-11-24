@@ -9,7 +9,7 @@ var HTTP = (function () {
         return token;
     }
     function send(method, url, params, ecb, scb) {
-        var t = localStorage.getItem('token');
+        var t = token || localStorage.getItem('token');
         var headers = {
             'x-auth': t
         };
@@ -29,8 +29,8 @@ var HTTP = (function () {
     }
 
     return {
-        setToken: setToken,
-        getToken: getToken,
+        setToken,
+        getToken,
         get: get,
         post: post,
         put: put,

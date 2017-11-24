@@ -363,7 +363,14 @@ textarea {
     border-top-left-radius: 4px;
     border-top-right-radius: 14px;
 }
+@keyframes ourFadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
 
+.dialog-table div div, #main > div {
+    animation: ourFadeIn .4s ease;
+}
 .all-users-table-head > div, .new-all-user {
     width: 16%;
     margin-right: 10px;
@@ -400,6 +407,13 @@ textarea {
     padding: 30px 30px 15px 30px;
     max-height: 700px;
     overflow: auto;
+}
+.dialog-content::-webkit-scrollbar {
+    background-color: #53586b;
+    width: 6px;
+}
+.dialog-content::-webkit-scrollbar-thumb {
+    background-color: #42445a;
 }
 
 @keyframes msg {

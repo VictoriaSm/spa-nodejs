@@ -1,7 +1,7 @@
 function messagesFunc() {
     HTTP.get('/allRooms', {}, ecb, scb);
     function scb(res) {
-        for ( var key in res ) {
+        res.forEach(function (item) {
             var content = document.createElement('div'),
                 table = document.querySelector('.all-msg-table'),
                 divI = document.createElement('div'),
@@ -11,10 +11,11 @@ function messagesFunc() {
             icon.classList.add('fa-eye');
             icon.classList.add('cursor');
             icon.onclick = function () {
-                HTTP.post('/dialogMsg', {room: res[key]}, errcb, succb);
+                HTTP.post('/dialogMsg', {room: item}, errcb, succb);
                 function succb(res) {
                     var dialog = document.querySelector('.dialog-table'),
-                        contentDialog = document.createElement('div');
+                        contentDialog = document.createElement('div'),
+                        div = document.querySelector('.dialog-content');
                     dialog.innerHTML = '';
 
                     res.forEach(function (msg) {
@@ -24,6 +25,8 @@ function messagesFunc() {
                             contentDialog.firstChild.innerHTML = msg[key];
                         }
                     });
+
+                    div.scrollTop = div.scrollHeight;
                 }
                 function errcb(code, err) {
                     console.log(code, err);
@@ -39,10 +42,8 @@ function messagesFunc() {
 
             content.insertBefore(document.createElement('div'), content.firstChild);
             content.firstChild.classList.add('new-all-msg');
-            if ( res[key].length > 15 ) {
-                content.firstChild.innerHTML = res[key].slice(0, 22) + '...';
-            } else content.firstChild.innerHTML = res[key];
-        }
+            content.firstChild.innerHTML = item;
+        });
     }
     function ecb(code, err) {
         console.log(code, err);

@@ -67,6 +67,10 @@ module.exports = function (server) {
                 return t !== socket.decoded.username;
             }).join('');
 
+            // var date = new Date();
+            // var optDate = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() +
+            //     ' ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+
             socket.in(sendRoom).broadcast.emit('message', msg);
             message.messages.create({
                 "message": data,
